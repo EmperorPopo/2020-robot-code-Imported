@@ -48,10 +48,10 @@ public class DriveCommandTesting extends CommandGroup {
 
   // DRIVE COMMANDS
 
-  TurnLeft turnLeft = new TurnLeft(driveGoal, headingGoal, leftPID, rightPID, anglePID, -90.0);
-  //DriveStraight drive = new DriveStraight(this.driveSystem.convertInchesToEncoderCount(driveGoal), this.headingGoal, this.leftPID, this.rightPID, this.anglePID);
+  //TurnLeft turnLeft = new TurnLeft(driveGoal, headingGoal, leftPID, rightPID, anglePID, -90.0);
+  DriveStraight drive = new DriveStraight(this.driveSystem.convertInchesToEncoderCount(driveGoal), this.headingGoal, this.leftPID, this.rightPID, this.anglePID);
 
   public DriveCommandTesting() {
-    addSequential(this.turnLeft);
+    addSequential(this.drive);
   }
 }
