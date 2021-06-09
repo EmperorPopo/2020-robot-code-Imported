@@ -112,8 +112,6 @@ public class Robot extends TimedRobot {
 		this.autoCommand = new DriveCommandTesting();
 		this.autoCommand.start();
 		this.SmartDashboardDisplay();
-		// Fuck swerve AAAAHHHHHHHHHHHHHHHHHhh
-		
 	}
 
 	@Override
