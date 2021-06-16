@@ -1,0 +1,13 @@
+[
+  {
+    "name": "2020 robot code-Imported (in project 2020 robot code-Imported)",
+    "file": "C:\\Users\\kaden\\Desktop\\Hi Fives stuff\\VS code stuff\\2020 robot code-Imported\\build\\libs\\2020 robot code-Imported.jar",
+    "extensions": [
+      "C:\\Users\\kaden\\Desktop\\Hi Fives stuff\\VS code stuff\\2020 robot code-Imported\\build\\tmp\\expandedArchives\\halsim_gui-2021.1.2-windowsx86-64.zip_a65f029882460810c7d9fdb675bf2f07\\windows\\x86-64\\shared\\halsim_gui.dll",
+      "C:\\Users\\kaden\\Desktop\\Hi Fives stuff\\VS code stuff\\2020 robot code-Imported\\build\\tmp\\expandedArchives\\halsim_ds_socket-2021.1.2-windowsx86-64.zip_f20bc948dbaa43f185b274998a8d049b\\windows\\x86-64\\shared\\halsim_ds_socket.dll"
+    ],
+    "env": {},
+    "librarydir": "C:\\Users\\kaden\\Desktop\\Hi Fives stuff\\VS code stuff\\2020 robot code-Imported\\build\\tmp\\jniExtractDir",
+    "mainclass": "org.usfirst.frc.team4944.robot.Main"
+  }
+]
