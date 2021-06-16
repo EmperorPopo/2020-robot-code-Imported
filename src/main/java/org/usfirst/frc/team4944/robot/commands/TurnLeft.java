@@ -19,12 +19,12 @@ public class TurnLeft extends Command {
 	DriveSystem driveSystem;
 	
 	// NAVX
-	AHRS gyro = new AHRS(I2C.Port.kMXP);
+	//AHRS gyro = new AHRS(I2C.Port.kMXP);
 	double kGyroRateCorrection;
   	double gyroRateCoeff = 0.0;
   	double robotPeriod = TimedRobot.kDefaultPeriod;
-  	int rate = gyro.getActualUpdateRate();
-	double gyroPeriod = 1.0 / rate;
+  	//int rate = gyro.getActualUpdateRate();
+	//double gyroPeriod = 1.0 / rate;
 	double targetAngle;
 	double angle;
 
@@ -41,17 +41,17 @@ public class TurnLeft extends Command {
 
 	public void init() {
 		System.out.println("Init");
-		gyro.calibrate();
+		//gyro.calibrate();
 	}
 
 	public void execute() {
-		this.angle = this.gyro.getYaw();
+		this.angle = this.driveSystem.getAngle();
     	// kGyroRateCorrection = (robotPeriod / gyroPeriod) * gyroRateCoeff;
 		// this.angle += gyro.getRate() * kGyroRateCorrection;
 		// this.angle = Math.IEEEremainder(angle, 360.0);
 		driveSystem.setLeftPower(-0.25);
 		driveSystem.setRightPower(-0.25);
-		System.out.println(this.gyro.getYaw());
+		System.out.println(this.driveSystem.getAngle());
 		// System.out.println(gyro.isConnected());
 		// System.out.println(gyro.isCalibrating());
 		SmartDashboard.putNumber("Gyro Yaw: ", this.angle);
