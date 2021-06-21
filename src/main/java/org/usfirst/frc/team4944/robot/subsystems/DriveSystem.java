@@ -63,8 +63,7 @@ public class DriveSystem extends Subsystem {
 		this.rightMotor1.setSelectedSensorPosition(0);
 		// GYRO
 		this.gyro = new AHRS(Port.kMXP);
-		this.gyro.reset();
-		// this.gyro.
+		//this.gyro.reset();
 		// ANGLE PID
 		this.anglePID = new BasicPID(1 / 500, 1 / 500, 1 / 500);
 	}

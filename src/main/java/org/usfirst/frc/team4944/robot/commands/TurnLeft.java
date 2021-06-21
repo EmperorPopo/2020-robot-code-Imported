@@ -18,6 +18,8 @@ public class TurnLeft extends Command {
 	// SUBSYSTEMS
 	DriveSystem driveSystem;
 
+	int numTicks;
+
 	//PID
 	BasicPID anglePID;
 	
@@ -47,27 +49,32 @@ public class TurnLeft extends Command {
 	public void init() {
 		System.out.println("Init");
 		//gyro.calibrate();
+		this.numTicks = 0;
 		anglePID.setSetPoint(this.angleInit + this.targetAngle);
 	}
 
 	public void execute() {
-		double anglePower = anglePID.getPower(driveSystem.getAngle());
-		SmartDashboard.putNumber("Gyro Yaw: ", this.driveSystem.getAngle());
-		driveSystem.setPower(anglePower, -anglePower);
+		double angle = this.driveSystem.getAngle();
+		double anglePower = anglePID.getPower(angle);
+		SmartDashboard.putNumber("Gyro Yaw: ", angle);
+		this.numTicks += 1;
+		SmartDashboard.putNumber("numTicks: ", this.numTicks);
+		//driveSystem.setPower(anglePower, -anglePower);
 	}
 
 	public boolean isFinished() {
-		if (this.anglePID.getError() < 5) {
-			if(this.driveSystem.getDoneDriveing()){
-				System.out.println("Exited");
-				driveSystem.setPower(0, 0);
-				return true;
-			}else{
-				return false;
-			}
-		}else{
-			return false;	
-		}
+		return false;
+		// if (this.anglePID.getError() < 5) {
+		// 	if(this.driveSystem.getDoneDriveing()){
+		// 		System.out.println("Exited");
+		// 		driveSystem.setPower(0, 0);
+		// 		return true;
+		// 	}else{
+		// 		return false;
+		// 	}
+		// }else{
+		// 	return false;	
+		// }
 
 	}
 }

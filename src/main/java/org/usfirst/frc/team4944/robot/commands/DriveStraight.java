@@ -5,6 +5,7 @@ import javax.swing.JList.DropLocation;
 import org.usfirst.frc.team4944.robot.subsystems.DriveSystem;
 import org.usfirst.team4944.robot.PID.BasicPID;
 import org.usfirst.team4944.robot.PID.DrivePID;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -53,9 +54,10 @@ public class DriveStraight extends Command {
 		double rightPower = -rightPID.getPower(driveSystem.getRightEncoder());
 		double anglePower = anglePID.getPower(driveSystem.getAngle());
 		// SETTING DRIVE TRAIN POWERS
-		driveSystem.setPower(leftPower + anglePower, rightPower - anglePower);
+		//driveSystem.setPower(leftPower + anglePower, rightPower - anglePower);
 		System.out.println("Left Power: " + leftPower + " Right Power: " + rightPower + " Angle Power: " + anglePower);
 		System.out.println("Left Error: " + this.leftPID.getError() + " Right Error: " + this.rightPID.getError() + " Angle Error: " + this.anglePID.getError());
+		SmartDashboard.putNumber(" Angle Error: ", this.anglePID.getError());
 	}
 
 	public boolean isFinished() {
