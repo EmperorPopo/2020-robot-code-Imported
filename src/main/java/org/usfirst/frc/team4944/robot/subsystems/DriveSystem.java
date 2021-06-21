@@ -10,8 +10,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.SerialPort.Port;
+//import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSystem extends Subsystem {
@@ -61,7 +62,7 @@ public class DriveSystem extends Subsystem {
 		this.leftMotor1.setSelectedSensorPosition(0);
 		this.rightMotor1.setSelectedSensorPosition(0);
 		// GYRO
-		this.gyro = new AHRS(I2C.Port.kMXP);
+		this.gyro = new AHRS(Port.kMXP);
 		this.gyro.reset();
 		// this.gyro.
 		// ANGLE PID
@@ -84,7 +85,7 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public double getAngle() {
-		return gyro.getAngle();
+		return this.gyro.getAngle();
 	}
 
 	public void resetAngle(){

@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 public class TurnLeft extends Command {
 	// SUBSYSTEMS
 	DriveSystem driveSystem;
+
+	//PID
+	BasicPID anglePID;
 	
 	// NAVX
 	//AHRS gyro = new AHRS(I2C.Port.kMXP);
@@ -25,44 +28,39 @@ public class TurnLeft extends Command {
   	double robotPeriod = TimedRobot.kDefaultPeriod;
   	//int rate = gyro.getActualUpdateRate();
 	//double gyroPeriod = 1.0 / rate;
-	double targetAngle;
+	double targetAngle, angleInit;
 	double angle;
 
-	public TurnLeft(Double targetAngle) {
+	public TurnLeft(Double targetAngle, BasicPID anglePID) {
 		this.driveSystem = new DriveSystem();
 		requires(driveSystem);
+		this.anglePID = anglePID;
 		//this.angle = gyro.getRoll();
     	// kGyroRateCorrection = (robotPeriod / gyroPeriod) * gyroRateCoeff;
 		// this.angle += gyro.getRate() * kGyroRateCorrection;
 		// this.angle = Math.IEEEremainder(angle, 360.0);
 		this.targetAngle = targetAngle;
+		this.angleInit = driveSystem.getAngle();
 		init();
 	}
 
 	public void init() {
 		System.out.println("Init");
 		//gyro.calibrate();
+		anglePID.setSetPoint(this.angleInit + this.targetAngle);
 	}
 
 	public void execute() {
-		this.angle = this.driveSystem.getAngle();
-    	// kGyroRateCorrection = (robotPeriod / gyroPeriod) * gyroRateCoeff;
-		// this.angle += gyro.getRate() * kGyroRateCorrection;
-		// this.angle = Math.IEEEremainder(angle, 360.0);
-		driveSystem.setLeftPower(-0.25);
-		driveSystem.setRightPower(-0.25);
-		System.out.println(this.driveSystem.getAngle());
-		// System.out.println(gyro.isConnected());
-		// System.out.println(gyro.isCalibrating());
-		SmartDashboard.putNumber("Gyro Yaw: ", this.angle);
+		double anglePower = anglePID.getPower(driveSystem.getAngle());
+		SmartDashboard.putNumber("Gyro Yaw: ", this.driveSystem.getAngle());
+		driveSystem.setPower(anglePower, -anglePower);
 	}
 
 	public boolean isFinished() {
-		if ((this.angle <= -90 /*Constant for now will eventually change it to a variable */)) {
+		if (this.anglePID.getError() < 5) {
 			if(this.driveSystem.getDoneDriveing()){
 				System.out.println("Exited");
-				driveSystem.setLeftPower(0);
-				driveSystem.setRightPower(0);
+				driveSystem.setPower(0, 0);
 				return true;
 			}else{
 				return false;

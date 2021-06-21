@@ -48,7 +48,7 @@ public class DriveCommandTesting extends CommandGroup {
 
   // DRIVE COMMANDS
 
-  TurnLeft turnLeft = new TurnLeft(-90.0);
+  TurnLeft turnLeft = new TurnLeft(-90.0, anglePID);
   //DriveStraight drive = new DriveStraight(this.driveSystem.convertInchesToEncoderCount(driveGoal), this.headingGoal, this.leftPID, this.rightPID, this.anglePID);
 
   public DriveCommandTesting() {
